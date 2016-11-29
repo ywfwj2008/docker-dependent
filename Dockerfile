@@ -5,7 +5,8 @@ ENV LIBICONV_VERSION=1.14 \
     CURL_VERSION=7.51.0 \
     LIBMCRYPT_VERSION=2.5.8 \
     MHASH_VERSION=0.9.9.9 \
-    MCRYPT_VERSION=2.6.8
+    MCRYPT_VERSION=2.6.8 \
+    JEMALLOC_VERSION=4.3.1
 
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y ca-certificates wget gcc g++ make cmake openssl libssl-dev bzip2 psmisc patch
@@ -58,4 +59,15 @@ RUN wget -c --no-check-certificate http://downloads.sourceforge.net/project/mcry
     ldconfig && \
     ./configure && \
     make && make install && \
+    rm -rf /tmp/*
+
+# install jemalloc
+# 查看jemalloc状态  lsof -n | grep jemalloc
+RUN wget -c --no-check-certificate https://github.com/jemalloc/jemalloc/releases/download/$JEMALLOC_VERSION/jemalloc-$JEMALLOC_VERSION.tar.bz2 && \
+    tar xjf jemalloc-$JEMALLOC_VERSION.tar.bz2 && \
+    cd jemalloc-$JEMALLOC_VERSION && \
+    ./configure && \
+    make && make install && \
+    echo '/usr/local/lib' > /etc/ld.so.conf.d/local.conf && \
+    ldconfig && \
     rm -rf /tmp/*
