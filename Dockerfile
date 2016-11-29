@@ -9,12 +9,11 @@ ENV LIBICONV_VERSION=1.14 \
     JEMALLOC_VERSION=4.3.1
 
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y ca-certificates apt-utils wget gcc g++ make cmake openssl libssl-dev bzip2 psmisc patch && \
+    apt-get install -y ca-certificates wget gcc g++ make cmake openssl libssl-dev bzip2 psmisc patch && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /tmp
 
-# php dependent
 # install libiconv
 ADD ./libiconv-glibc-2.16.patch /tmp/libiconv-glibc-2.16.patch
 RUN wget -c --no-check-certificate http://ftp.gnu.org/pub/gnu/libiconv/libiconv-$LIBICONV_VERSION.tar.gz && \
