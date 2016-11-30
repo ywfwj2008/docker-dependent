@@ -1,7 +1,8 @@
 FROM debian:latest
 MAINTAINER ywfwj2008 <ywfwj2008@163.com>
 
-ENV LIBICONV_VERSION=1.14 \
+ENV RUN_USER=www \
+    LIBICONV_VERSION=1.14 \
     CURL_VERSION=7.51.0 \
     LIBMCRYPT_VERSION=2.5.8 \
     MHASH_VERSION=0.9.9.9 \
@@ -11,6 +12,7 @@ ENV LIBICONV_VERSION=1.14 \
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y ca-certificates wget gcc g++ make cmake openssl libssl-dev bzip2 psmisc patch && \
     rm -rf /var/lib/apt/lists/*
+RUN useradd -M -s /sbin/nologin $RUN_USER
 
 WORKDIR /tmp
 
