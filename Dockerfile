@@ -21,7 +21,7 @@ ADD ./libiconv-glibc-2.16.patch /tmp/libiconv-glibc-2.16.patch
 RUN wget -c --no-check-certificate http://ftp.gnu.org/pub/gnu/libiconv/libiconv-${LIBICONV_VERSION}.tar.gz && \
     tar xzf libiconv-${LIBICONV_VERSION}.tar.gz && \
     patch -d libiconv-${LIBICONV_VERSION} -p0 < libiconv-glibc-2.16.patch && \
-    pushd libiconv-${LIBICONV_VERSION} && \
+    cd libiconv-${LIBICONV_VERSION} && \
     ./configure --prefix=/usr/local && \
     make && make install && \
     rm -rf /tmp/*
@@ -29,7 +29,7 @@ RUN wget -c --no-check-certificate http://ftp.gnu.org/pub/gnu/libiconv/libiconv-
 # install curl
 RUN wget -c --no-check-certificate https://curl.haxx.se/download/curl-${CURL_VERSION}.tar.gz && \
     tar xzf curl-${CURL_VERSION}.tar.gz && \
-    pushd curl-${CURL_VERSION} && \
+    cd curl-${CURL_VERSION} && \
     ./configure --prefix=/usr/local && \
     make && make install && \
     rm -rf /tmp/*
@@ -37,7 +37,7 @@ RUN wget -c --no-check-certificate https://curl.haxx.se/download/curl-${CURL_VER
 # install mhash
 RUN wget -c --no-check-certificate http://downloads.sourceforge.net/project/mhash/mhash/${MHASH_VERSION}/mhash-${MHASH_VERSION}.tar.gz && \
     tar xzf mhash-${MHASH_VERSION}.tar.gz && \
-    pushd mhash-${MHASH_VERSION} && \
+    cd mhash-${MHASH_VERSION} && \
     ./configure && \
     make && make install && \
     rm -rf /tmp/*
@@ -45,11 +45,11 @@ RUN wget -c --no-check-certificate http://downloads.sourceforge.net/project/mhas
 # install libmcrypt
 RUN wget -c --no-check-certificate http://downloads.sourceforge.net/project/mcrypt/Libmcrypt/${LIBMCRYPT_VERSION}/libmcrypt-${LIBMCRYPT_VERSION}.tar.gz && \
     tar xzf libmcrypt-${LIBMCRYPT_VERSION}.tar.gz && \
-    pushd libmcrypt-${LIBMCRYPT_VERSION} && \
+    cd libmcrypt-${LIBMCRYPT_VERSION} && \
     ./configure && \
     make && make install && \
     ldconfig && \
-    pushd libltdl && \
+    cd libltdl && \
     ./configure --enable-ltdl-install && \
     make && make install && \
     rm -rf /tmp/*
@@ -57,7 +57,7 @@ RUN wget -c --no-check-certificate http://downloads.sourceforge.net/project/mcry
 # install mcrypt
 RUN wget -c --no-check-certificate http://downloads.sourceforge.net/project/mcrypt/MCrypt/${MCRYPT_VERSION}/mcrypt-${MCRYPT_VERSION}.tar.gz && \
     tar xzf mcrypt-${MCRYPT_VERSION}.tar.gz && \
-    pushd mcrypt-${MCRYPT_VERSION} && \
+    cd mcrypt-${MCRYPT_VERSION} && \
     ldconfig && \
     ./configure && \
     make && make install && \
@@ -67,7 +67,7 @@ RUN wget -c --no-check-certificate http://downloads.sourceforge.net/project/mcry
 # 查看jemalloc状态  lsof -n | grep jemalloc
 RUN wget -c --no-check-certificate https://github.com/jemalloc/jemalloc/releases/download/${JEMALLOC_VERSION}/jemalloc-${JEMALLOC_VERSION}.tar.bz2 && \
     tar xjf jemalloc-${JEMALLOC_VERSION}.tar.bz2 && \
-    pushd jemalloc-${JEMALLOC_VERSION} && \
+    cd jemalloc-${JEMALLOC_VERSION} && \
     ./configure && \
     make && make install && \
     echo '/usr/local/lib' > /etc/ld.so.conf.d/local.conf && \
