@@ -10,7 +10,7 @@ ENV RUN_USER=www \
     JEMALLOC_VERSION=4.3.1
 
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y ca-certificates wget gcc g++ make cmake autoconf patch bzip2 psmisc pkg-config chkconfig sendmail openssl libssl-dev curl libcurl4-openssl-dev libxslt-dev libicu-dev libxml2 libxml2-dev libjpeg-dev libpng12-dev libpng3 libfreetype6 libfreetype6-dev libsasl2-dev && \
+    apt-get install -y ca-certificates wget gcc g++ make cmake autoconf patch bzip2 psmisc pkg-config sendmail openssl libssl-dev curl libcurl4-openssl-dev libxslt-dev libicu-dev libxml2 libxml2-dev libjpeg-dev libpng12-dev libpng3 libfreetype6 libfreetype6-dev libsasl2-dev && \
     rm -rf /var/lib/apt/lists/*
 RUN useradd -M -s /sbin/nologin ${RUN_USER}
 
